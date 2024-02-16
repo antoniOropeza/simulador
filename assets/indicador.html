@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css" />
+    
+</head>
+<body>
+
+    <header>
+        <img id="logo" src="imss2.png" width="68" height="65">
+        <h1>Simulador de Objetivos e Indicadores</h1>
+        <nav>
+            <ul>
+              <li><a href="objetivo.html">Objetivo</a></li>
+              <li><a href="indicador.html">Indicador</a></li>
+            </ul>
+          </nav>
+      </header>
+      
+
+    <div id="formulario">
+
+        <form id="indicadorForm">
+            <div class="combo-container">
+                <div class="combo-label">Variable</div>
+                <textarea id="variable" oninput="contarLetras()" readonly></textarea>
+                <div class="combo-description">Conector e intención del objetivo</div>
+            </div>
+
+            <div class="combo-container">
+                <div class="combo-label">Complemento</div>
+                <select id="complemento" onchange="contarLetras()">
+                    <option value=""></option>
+                    <option value="en un ">en un</option>
+                    <option value="al ">al</option>
+                    <option value="el ">el</option>
+                    <option value="hasta en un ">hasta en un</option>
+                    <option value="en un mínimo del ">en un mínimo del</option>
+                    <option value="en un máximo del ">en un máximo del</option>
+                </select>
+                <div class="combo-description"></div>
+            </div>
+            <div class="combo-container">
+                <div class="combo-label">Porcentaje</div>
+                <select id="porcentaje" onchange="contarLetras()">
+                    <option value=""></option>
+                    <option value="100% ">100%</option>
+                    <option value="95% ">95%</option>
+                    <option value="90% ">90%</option>
+                    <option value="85% ">85%</option>
+                    <option value="80% ">80%</option>
+                    <option value="75% ">75%</option>
+                    <option value="70% ">70%</option>
+                    <option value="65% ">65%</option>
+                    <option value="60% ">60%</option>
+                    <option value="55% ">55%</option>
+                    <option value="50% ">50%</option>
+                    <option value="45% ">45%</option>
+                    <option value="40% ">40%</option>
+                    <option value="35% ">35%</option>
+                    <option value="30% ">30%</option>
+                    <option value="25% ">25%</option>
+                    <option value="20% ">20%</option>
+                    <option value="15% ">15%</option>
+                    <option value="10% ">10%</option>
+                    <option value="5% ">5%</option>
+                </select>
+                <div class="combo-description"></div>
+            </div>
+            <div class="combo-container">
+                <div class="combo-label">Acciones de evidencia</div>
+                <textarea id="acciones" oninput="contarLetras()"></textarea>
+                <div class="combo-description">Escriba las acciones o manera en que se va a llevar a cabo la variable.</div>
+            </div>
+
+            <div class="combo-container">
+                <div class="combo-label">Método</div>
+                <select id="metodo" onchange="contarLetras()">
+                    <option value=""></option>
+                    <option value="mediante acciones preventivas ">mediante acciones preventivas</option>
+                    <option value="mediante acciones preventivas y correctivas ">mediante acciones preventivas y correctivas</option>
+                    <option value="por medio de una bitacora ">por medio de una bitacora</option>
+                    <option value="a través de supervisiones ">a través de supervisiones</option>
+                    <option value="en comparación con el año anterior ">en comparación con el año anterior</option>
+                    <option value="a traves de un reporte en SIAP ">a traves de un reporte en SIAP</option>
+                    <option value="mediante el buzon de quejas ">mediante el buzon de quejas</option>
+                </select>
+                <div class="combo-description"></div>
+            </div>
+
+            <div class="combo-container">
+                <div class="combo-label">Periodo</div>
+                <div class="combos-group">
+                    <textarea id="conector" oninput="contarLetras()"></textarea>
+                    <br>
+                    <select id="frecuencia" onchange="contarLetras()">
+                        <option value=""></option>
+                        <option value="durante el año en curso ">durante el año en curso</option>
+                        <option value="anual ">anual</option>
+                        <option value="semestral ">semestral</option>
+                        <option value="trimestral ">trimestral</option>
+                        <option value="bimestral ">bimestral</option>
+                        <option value="mensual ">mensual</option>
+                        <option value="diario ">diario</option>
+                    </select>
+                </div>
+                <div class="combo-description">Conector textual y frecuencia</div>
+            </div>
+
+            <button type="button" class="btn btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Crear Indicador
+            </button>
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Objetivo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="resultado"></p>
+                            <div class="alert alert-danger">
+                                No olvides que solo es una herramienta que puede apoyarte en estructurar de manera dinámica un objetivo y un indicador para tu curso, por lo que en caso de ser necesario deberás redactarlo acorde a las necesidades de capacitación de tu OOAD o Dirección Normativa con base en las guias ubicadas en el repositorio de Planes Formativos; de igual forma se hace de conocimiento que  
+                                <strong>Todo OBJETIVO e INDICADOR será revisado por el Área de Desarrollo de Competencias y Formación Instruccional</strong>  
+                              </div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="copiarBtn">Copiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        </form>
+    </div>
+
+    <script>
+        function contarLetras() {
+            var variableText = document.getElementById("variable");
+            var complementoSelect = document.getElementById("complemento");
+            var porcentajeSelect = document.getElementById("porcentaje");
+            var accionesText = document.getElementById("acciones");
+            var metodoSelect = document.getElementById("metodo");
+            var conectorText = document.getElementById("conector");
+            var frecuenciaSelect = document.getElementById("frecuencia");
+           
+            document.getElementById("resultado").innerHTML = variableText.value + " " + complementoSelect.value + porcentajeSelect.value + accionesText.value +  " " + metodoSelect.value + conectorText.value + " " + frecuenciaSelect.value;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("variable").value = localStorage.getItem("indicador");
+            document.getElementById("complemento").value = "";
+            document.getElementById("porcentaje").value = "";
+            document.getElementById("acciones").value = "";
+            document.getElementById("metodo").value = "";
+            document.getElementById("conector").value = "";
+            document.getElementById("frecuencia").value = "";
+
+            contarLetras();
+        });
+
+
+       document.getElementById('copiarBtn').addEventListener('click', function() {
+            var resultado = document.getElementById('resultado');
+            var textoObjetivo = resultado.innerText;
+    
+
+            navigator.clipboard.writeText(textoObjetivo).then(function() {
+                $('#staticBackdrop').modal('hide');
+            }, function(err) {
+                console.error('Error al copiar el texto: ', err);
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+

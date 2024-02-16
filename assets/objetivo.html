@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+    <header>
+        <img id="logo" src="imss2.png" width="68" height="65">
+        <h1>Simulador de Objetivos e Indicadores</h1>
+        <nav>
+            <ul>
+              <li><a href="objetivo.html">Objetivo</a></li>
+              <li><a href="indicador.html">Indicador</a></li>
+            </ul>
+          </nav>
+      </header>
+      
+
+    <div id="formulario">
+
+        <form id="objetivoForm">
+            <div class="combo-container">
+                <div class="combo-label">¿Quién?</div>
+                <select id="quien" onchange="contarLetras()">
+                    <option value=""></option>
+                    <option value="El y la participante ">El y la participante</option>
+                    <option value="Los participantes ">Los participantes</option>
+                    <option value="Los trabajadores ">Los trabajadores</option>
+                    <option value="Las personas ">Las personas</option>
+                    <option value="Los usuarios ">Los usuarios</option>
+                </select>
+                <div class="combo-description">Son los sujetos que van a realizar la acción</div>
+            </div>
+            
+            <div class="combo-container">
+                <div class="combo-label">Verbo</div>
+                <div class="combos-group">
+                    <select id="nivel" onchange="cargarVerbos()">
+                        <option value="">Selecciona un nivel</option>
+                        <option value="conocimiento">Conocimiento</option>
+                        <option value="comprension">Comprensión</option>
+                        <option value="aplicacion">Aplicación</option>
+                        <option value="analisis">Análisis</option>
+                        <option value="sintesis">Síntesis</option>
+                        <option value="evaluacion">Evaluación</option>
+                    </select>
+                    <select id="verbo" onchange="contarLetras()"></select>
+                </div>
+                
+                <div class="combo-description">Acción o conducta que aprenderá el participante</div>
+            </div>
+
+            <div class="combo-container">
+                <div class="combo-label">¿Qué?</div>
+                <textarea id="que" oninput="contarLetras()"></textarea>
+                <div class="combo-description">¿Qué acción se va a realizar relacionada con el verbo? Siempre se debe vincular con el tema principal</div>
+            </div>
+
+            <div class="combo-container">
+                <div class="combo-label">¿Cómo?</div>
+                <textarea id="como" oninput="contarLetras()"></textarea>
+                <div class="combo-description">¿Qué técnicas o estrategias se emplearán para cumplir el objetivo?</div>
+            </div>
+
+            <div class="combo-container">
+                <div class="combo-label">¿Para qué?</div>
+                <div class="combos-group">
+                    <select id="conector" onchange="contarLetras()">
+                        <option value="">Selecciona conector textual</option>
+                        <option value="a fin de ">a fin de</option>
+                        <option value="para ">para</option>
+                        <option value="con el fin de ">con el fin de</option>
+                        <option value="con la finalidad de ">con la finalidad de</option>
+                        <option value="con intención de ">con intención de</option>
+                        <option value="con el propósito de ">con el propósito de</option>
+                    </select>
+                    <select id="intencion" onchange="contarLetras()">
+                        <option value="">Selecciona intención/finalidad</option>
+                        <option value="mejorar ">mejorar</option>
+                        <option value="aumentar ">aumentar</option>
+                        <option value="disminuir ">disminuir</option>
+                        <option value="reducir ">reducir</option>
+                        <option value="atender ">atender</option>
+                        <option value="aplicar ">aplicar</option>
+                        <option value="incrementar ">incrementar</option>
+                        <option value="prevenir ">prevenir</option>
+                        <option value="desarrollar ">desarrollar</option>
+                    </select>
+                </div>
+                <br>
+                <textarea id="complemento" placeholder="Complemento" oninput="contarLetras()"></textarea>
+                <div class="combo-description">¿Qué quiero mejorar? ¿Cuál será el impacto de mi capacitación?</div>
+            </div>
+
+            <div class="combo-container">
+                <div id="contador">Número de caracteres: 0</div>
+            </div>
+
+            <button type="button" class="btn btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Crear Objetivo
+            </button>
+
+            <div id="myModal">
+                <div id="modalContent">
+                    <span id="cerrarModal" onclick="cerrarModal()">X</span>
+                    <h2>Objetivo</h2>
+                    <textarea id="resultadoModal" readonly wrap></textarea>
+                    <button onclick="copiarResultadoModal()">Copiar</button>
+                </div>
+            </div>
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Objetivo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="resultado"></p>
+                            <div class="alert alert-danger">
+                                No olvides que solo es una herramienta que puede apoyarte en estructurar de manera dinámica un objetivo y un indicador para tu curso, por lo que en caso de ser necesario deberás redactarlo acorde a las necesidades de capacitación de tu OOAD o Dirección Normativa con base en las guias ubicadas en el repositorio de Planes Formativos; de igual forma se hace de conocimiento que  
+                                <strong>Todo OBJETIVO e INDICADOR será revisado por el Área de Desarrollo de Competencias y Formación Instruccional</strong>  
+                              </div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="copiarBtn">Copiar</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        function cargarVerbos() {
+            var verboSelect = document.getElementById("verbo");
+            verboSelect.innerHTML = "";
+
+            var nivelSelect = document.getElementById("nivel");
+            var nivel = nivelSelect.value;
+
+            var verbos = [];
+            switch (nivel) {
+                case "conocimiento":
+                    verbos = ["","definirán", "describirán", "identificarán", "indicarán", "reconocerán","señalarán"];
+                    break;
+                case "comprension":
+                    verbos = ["","clasificarán","compararán","discutirán","distinguirán","estimarán","explicarán","relacionarán","revisarán"];
+                    break;
+                case "aplicacion":
+                    verbos = ["","aplicarán","construirán","demostrarán","emplearán","modificarán","operarán","prepararán","producirán","resolverán","utilizarán","solucionarán"];
+                    break;
+                case "analisis":
+                    verbos = ["","analizarán","decidirán","diferenciarán","distinguirán","examinarán","ordenarán","relacionarán","seleccionarán"];
+                    break;
+                case "sintesis":
+                    verbos = ["","concluirán","crearán","establecerán","explicarán","justificarán","modificarán","organizarán","planearán","propondrán"];
+                    break;
+                case "evaluacion":
+                    verbos = ["","actualizarán","compararán","contrastarán","elegirán","estimarán","evaluarán","predecirán","validarán","valorarán"];
+                    break;
+            }
+
+            for (var i = 0; i < verbos.length; i++) {
+                var opcion = document.createElement("option");
+                opcion.text = verbos[i];
+                verboSelect.add(opcion);
+            }
+        }
+
+        function contarLetras() {
+            var quienSelect = document.getElementById("quien");
+            var verboSelect = document.getElementById("verbo");
+            var conectorSelect = document.getElementById("conector");
+            var intencionSelect = document.getElementById("intencion");
+            var queText = document.getElementById("que");
+            var comoText = document.getElementById("como");
+            var complementoText = document.getElementById("complemento");
+            var contador = document.getElementById("contador");
+
+            var letrasSeleccionadas = quienSelect.value.length + verboSelect.value.length + conectorSelect.value.length + intencionSelect.value.length + queText.value.length + comoText.value.length + complementoText.value.length;
+            
+            contador.textContent = "Número de caracteres: " + letrasSeleccionadas;
+
+            if (letrasSeleccionadas > 300) {
+                contador.classList.add("red");
+            } else {
+                contador.classList.remove("red");
+            }
+
+            document.getElementById("resultado").innerHTML = quienSelect.value + verboSelect.value + " " + queText.value + " " + comoText.value +  " " + conectorSelect.value + intencionSelect.value + complementoText.value;
+
+            var variable = intencionSelect.value + complementoText.value;
+
+            var indicador = mayuscula(variable);
+
+            localStorage.setItem("indicador", indicador);
+            
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("quien").value = "";
+            document.getElementById("nivel").value = "";
+            document.getElementById("verbo").value = "";
+            document.getElementById("que").value = "";
+            document.getElementById("como").value = "";
+            document.getElementById("conector").value = "";
+            document.getElementById("intencion").value = "";
+            document.getElementById("complemento").value = "";
+            contarLetras();
+        });
+
+        function mostrarModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "flex";
+
+            var resultado = document.getElementById("resultado");
+            var resultadoModal = document.getElementById("resultadoModal");
+            resultadoModal.value = resultado.value;
+        }
+
+        function cerrarModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        function copiarResultadoModal() {
+            var resultadoModal = document.getElementById("resultadoModal");
+            var copiarBtn = document.getElementById("copiar-btn");
+
+            resultadoModal.select();
+            document.execCommand("copy");
+            
+            copiarBtn.textContent = "Copiado";
+            setTimeout(function() {
+                copiarBtn.textContent = "Copiar";
+                cerrarModal();
+            }, 1000);
+        }
+
+        function mayuscula(oracion) {
+            return oracion.charAt(0).toUpperCase() + oracion.slice(1);
+        }
+        
+        document.getElementById('copiarBtn').addEventListener('click', function() {
+            var resultado = document.getElementById('resultado');
+            var textoObjetivo = resultado.innerText;
+    
+
+            navigator.clipboard.writeText(textoObjetivo).then(function() {
+                $('#staticBackdrop').modal('hide');
+            }, function(err) {
+                console.error('Error al copiar el texto: ', err);
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+

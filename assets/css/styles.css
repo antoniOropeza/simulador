@@ -1,0 +1,176 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+header {
+  width: 100%;
+  height: 70px;
+  background-color: #1f6157;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+}
+#logo{
+  padding: 0 0 0 1rem;    
+}
+nav {
+  width: 50%;
+  max-width: 300px;
+  height: 50px;
+}
+nav > ul {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-inline-start: 0;
+  margin-block: 0;
+  height: 100%;
+}
+nav > ul > li {
+  color: #dfdfe2;
+  margin: 0 0.2rem;
+  padding: 0.2rem;
+  display: block;
+}
+
+nav > ul > li:hover {
+  background-color: #dfdfe2;
+  color: #1b1b32;
+  cursor: pointer;
+}
+
+li > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  color: #ffffff;
+  font-size: min(5vw, 1.2em);
+  text-align: center;
+}
+
+#formulario {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  max-width: 600px;
+  width: 100%;
+  margin: 100px auto 20px;
+}
+
+h2 {
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.combo-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.combo-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.combo-description {
+  font-size: 13px;
+  color: #777;
+}
+
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+
+}
+
+.combos-group {
+  display: flex;
+  gap: 10px;
+}
+
+
+#contador {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+#resultado {
+  font-size: 15px;
+  margin: 10px;
+  border: 1px solid black; 
+  padding: 20px; 
+  border-radius: 5px; 
+}
+#resultadoModal {
+  font-size: 15px;
+  width: 95%;
+  height: 300px;
+}
+
+#contador.red {
+  color: #ff0000;
+}
+
+input[type="button"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#myModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+#modalContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  max-width: 600px;
+  width: 100%;
+}
+
+#cerrarModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
