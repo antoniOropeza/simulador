@@ -30,7 +30,7 @@
             <div class="combo-container">
                 <div class="combo-label">Variable</div>
                 <textarea id="variable" oninput="contarLetras()" readonly></textarea>
-                <div class="combo-description">Conector e intención del objetivo</div>
+                <div class="combo-description"> ¿Qué es lo que se quiere medir? - Se relaciona con el <strong>¿para qué?</strong> del objetivo</div>
             </div>
 
             <div class="combo-container">
@@ -71,12 +71,12 @@
                     <option value="10% ">10%</option>
                     <option value="5% ">5%</option>
                 </select>
-                <div class="combo-description"></div>
+                <div class="combo-description">Medida que se relaciona con el logro de la variable – aproximado o esperado</div>
             </div>
             <div class="combo-container">
                 <div class="combo-label">Acciones de evidencia</div>
                 <textarea id="acciones" oninput="contarLetras()"></textarea>
-                <div class="combo-description">Escriba las acciones o manera en que se va a llevar a cabo la variable.</div>
+                <div class="combo-description">Acciones o manera en que se va a evidenciar la mejora/variable</div>
             </div>
 
             <div class="combo-container">
@@ -91,13 +91,13 @@
                     <option value="a traves de un reporte en SIAP ">a traves de un reporte en SIAP</option>
                     <option value="mediante el buzon de quejas ">mediante el buzon de quejas</option>
                 </select>
-                <div class="combo-description"></div>
+                <div class="combo-description">¿Cómo se verificará el cumplimiento de la variable?</div>
             </div>
 
             <div class="combo-container">
                 <div class="combo-label">Periodo</div>
                 <div class="combos-group">
-                    <textarea id="conector" oninput="contarLetras()"></textarea>
+                    <textarea id="conector" placeholder="Conector textual" oninput="contarLetras()"></textarea>
                     <br>
                     <select id="frecuencia" onchange="contarLetras()">
                         <option value=""></option>
@@ -110,7 +110,7 @@
                         <option value="diario ">diario</option>
                     </select>
                 </div>
-                <div class="combo-description">Conector textual y frecuencia</div>
+                <div class="combo-description">Periodo de tiempo en el que se verificará o evaluará el cumplimiento de la variable</div>
             </div>
 
             <button type="button" class="btn btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
